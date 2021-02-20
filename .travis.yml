@@ -14,8 +14,7 @@ before_script:
   - cargo install-update -a
 
 script:
-  - ls /
-  - mdbook build / && mdbook test /
+  - mdbook build $HOME/Albus/BssDocs && mdbook test $HOME/Albus/BssDocs
   
 deploy:
   provider: pages
@@ -23,7 +22,7 @@ deploy:
   edge: true
   cleanup: false
   github-token: $GITHUB_TOKEN
-  local-dir: /book
+  local-dir: $HOME/Albus/BssDocs/book
   keep-history: false
   on:
     branch: main
