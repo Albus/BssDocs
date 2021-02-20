@@ -1,6 +1,6 @@
 [book]
-authors = ["Anton Rastyazhenko"]
-language = "en"
+authors = ["Антон Растяженко"]
+language = "ru"
 multilingual = false
 src = "src"
 title = "Документация SBS"
