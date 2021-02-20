@@ -1,6 +1,10 @@
-[book]
+﻿[book]
 authors = ["Антон Растяженко"]
 language = "ru"
 multilingual = false
 src = "src"
 title = "Документация SBS"
+
+[output.html.print]
+enable = false
+
