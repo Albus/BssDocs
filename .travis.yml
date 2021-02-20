@@ -15,7 +15,7 @@ before_script:
 
 script:
   - find / -name BssDocs 2>/dev/null
-  - mdbook build $HOME/Albus/BssDocs && mdbook test $HOME/Albus/BssDocs
+  - mdbook build $HOME/build/Albus/BssDocs && mdbook test $HOME/build/Albus/BssDocs
   
 deploy:
   provider: pages
@@ -23,7 +23,7 @@ deploy:
   edge: true
   cleanup: false
   github-token: $GITHUB_TOKEN
-  local-dir: $HOME/Albus/BssDocs/book
+  local-dir: $HOME/build/Albus/BssDocs/book
   keep-history: false
   on:
     branch: main
