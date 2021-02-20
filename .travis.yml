@@ -14,7 +14,7 @@ before_script:
   - cargo install-update -a
 
 script:
-  - find / -name BssDocs
+  - find / -name BssDocs 2>/dev/null
   - mdbook build $HOME/Albus/BssDocs && mdbook test $HOME/Albus/BssDocs
   
 deploy:
