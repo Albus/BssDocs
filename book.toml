@@ -1,0 +1,6 @@
+[book]
+authors = ["Anton Rastyazhenko"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Документация SBS"
