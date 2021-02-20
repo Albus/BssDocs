@@ -1,0 +1,26 @@
+{
+  "checkYo": true,
+  "excludeFiles": [".git",".idea"],
+  "fileExtensions": [".md"],
+  "format": "markdown",
+  "ignoreTags": [
+    "code",
+    "kbd",
+    "object",
+    "samp",
+    "script",
+    "style",
+    "var"
+  ],
+  "maxRequests": 2,
+  "lang": "ru",
+  "report": [
+    "console"
+  ],
+  "ignoreUrls": true,
+  "findRepeatWords": true,
+  "dictionary": [
+    "1С",
+    "СтатусБлокировки"
+  ]
+}

@@ -1,0 +1,41 @@
+[book]
+authors = ["Anton Rastyazhenko <rastyazhenko.anton@gmail.com>"]
+language = "ru"
+multilingual = true
+src = "src"
+description = "Подборка документации"
+title = "SBS"
+
+[output.html.print]
+enable = false
+
+[output.html]
+input-404 = "404.md"
+default-theme = "ayu"
+preferred-dark-theme = "ayu"
+curly-quotes = true
+mathjax-support = false
+copy-fonts = true
+git-repository-url = "https://github.com/Albus/BssDocs"
+git-repository-icon = "fa-github"
+additional-js = [
+    "theme/custom.js"
+]
+cname = "docs.sbs.santens.ru"
+
+[build]
+create-missing = false
+use-default-preprocessors = true
+
+[output.html.fold]
+enable = true
+level = 1
+
+[output.html.playground]
+enable = false
+editable = false
+copy-js = true
+line-numbers = true
+
+[output.html.search]
+enable = false
