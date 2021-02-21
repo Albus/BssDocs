@@ -16,6 +16,6 @@ mathjax-support = false
 copy-fonts = true
 git-repository-url = "https://github.com/Albus/BssDocs"
 git-repository-icon = "fa-github"
-additional-js = ["custom.js"]
+additional-js = ["src/custom.js"]
 
 
