@@ -290,13 +290,16 @@ IP адрес сервера RAS (`string`)
 
   - Тело
     ```json
-    { "environment": { "production": false } }
+    {
+      "environment": {
+        "production": false
+    } }
     ```
 
-### Установить параметры блокировки базы данных 1С
+### Установить статус блокировки базы данных 1С
 /Bases/[Сервер](?highlight=Сервер#Сервер)/[Порт](?highlight=Порт#Порт)/[Кластер](?highlight=Кластер#Кластер)/[База](?highlight=База#База)/[СтатусБлокировки](?highlight=СтатусБлокировки#СтатусБлокировки)?[admin](?highlight=admin#admin)&[key](?highlight=key#key)&[login](?highlight=login#login)&[password](?highlight=password#password)&[uc](?highlight=uc#uc)
 
-Возвращает настройки информационной базы после выполнения функции
+Возвращает параметры информационной базы после выполнения функции
 
 #### Пример вызова функции
 
