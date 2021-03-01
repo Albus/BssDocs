@@ -1,6 +1,6 @@
 [book]
 authors = ["Anton Rastyazhenko <rastyazhenko.anton@gmail.com>"]
-language = "ru"
+language = "ru-RU"
 multilingual = true
 src = "src"
 description = "Подборка документации"
@@ -18,14 +18,16 @@ mathjax-support = false
 copy-fonts = true
 git-repository-url = "https://github.com/Albus/BssDocs"
 git-repository-icon = "fa-github"
-additional-js = [
-    "theme/custom.js"
-]
+additional-js = ["theme/custom.js", "theme/mermaid.min.js", "theme/mermaid-init.js"]
 cname = "docs.sbs.santens.ru"
 
 [build]
 create-missing = false
 use-default-preprocessors = true
+
+[preprocessor]
+[preprocessor.mermaid]
+command = "mdbook-mermaid"
 
 [output.html.fold]
 enable = true
@@ -38,4 +40,4 @@ copy-js = true
 line-numbers = true
 
 [output.html.search]
-enable = false
+enable = true
