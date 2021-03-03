@@ -2,6 +2,8 @@
 
 создаёт архив, с выборкой файлов за определённый период
 
+{{#include inc/download.md}}
+
 ## Параметры
 
 {{#include ./../../inc/console_params_rules.md}}

@@ -1,6 +1,9 @@
 # Посуточная архивация файлов
 
-Механизм использует winrar.
+{{#include inc/download.md}}
+
+Механизм использует [winrar](https://www.win-rar.com)
+
 В работе участвуют 2 batch-скрипта.
 
 - [archive.cmd](archive.md)
