@@ -3,8 +3,7 @@
 генерирует серию вызовов [archive.cmd](archive.md), для перемещения файлов в посуточные архивы 
 
 ## Скачать
-- [start.cmd](files/start.zip)
-
+- [zip_every_day](https://github.com/Albus/zip_every_day/releases/latest)
 
 ## Параметры
 
