@@ -2,10 +2,6 @@
 
 создаёт архив, с выборкой файлов за определённый период
 
-## Скачать
-- [archive.cmd](files/archive.zip)
-
-
 ## Параметры
 
 {{#include ./../../inc/console_params_rules.md}}
