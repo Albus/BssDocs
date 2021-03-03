@@ -2,10 +2,6 @@
 
 генерирует серию вызовов [archive.cmd](archive.md), для перемещения файлов в посуточные архивы 
 
-## Скачать
-- [start.cmd](files/start.zip)
-
-
 ## Параметры
 
 {{#include ./../../inc/console_params_rules.md}}
