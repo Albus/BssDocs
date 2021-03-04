@@ -74,7 +74,7 @@ IP адрес сервера RAS (`string`)
 ## Функции API
 
 ### Получить кластеры сервера 1С
-/Clusters/[Сервер](?highlight=Сервер#Сервер)/[Порт](?highlight=Порт#Порт)?[admin](?highlight=admin#admin)&[key](?highlight=key#key)
+/Clusters/[Сервер][1]/[Порт][2]?[admin][4]&[key][6]
 
 #### Пример вызова функции
 
@@ -133,7 +133,7 @@ IP адрес сервера RAS (`string`)
     ```
 
 ### Получить базы данных кластера 1С
-/Bases/[Сервер](?highlight=Сервер#Сервер)/[Порт](?highlight=Порт#Порт)/[Кластер](?highlight=Кластер#Кластер)?[admin](?highlight=admin#admin)&[key](?highlight=key#key)
+/Bases/[Сервер][1]/[Порт][2]/[Кластер][3]?[admin][4]&[key][6]
 
 #### Пример вызова функции
 
@@ -211,7 +211,7 @@ IP адрес сервера RAS (`string`)
     ```
     
 ### Получить базу данных кластера 1С
-/Bases/[Сервер](?highlight=Сервер#Сервер)/[Порт](?highlight=Порт#Порт)/[Кластер](?highlight=Кластер#Кластер)/[База](?highlight=База#База)?[admin](?highlight=admin#admin)&[key](?highlight=key#key)&[login](?highlight=login#login)&[password](?highlight=password#password)
+/Bases/[Сервер][1]/[Порт][2]/[Кластер][3]/[База][5]?[admin][4]&[key][6]&[login][7]&[password][8]
 
 #### Пример вызова функции
 
@@ -265,7 +265,7 @@ IP адрес сервера RAS (`string`)
     ```
 
 ### Получить параметр блокировки базы данных 1С
-/BaseParams/[Сервер](?highlight=Сервер#Сервер)/[Порт](?highlight=Порт#Порт)/[Кластер](?highlight=Кластер#Кластер)/[База](?highlight=База#База)?[admin](?highlight=admin#admin)&[key](?highlight=key#key)&[login](?highlight=login#login)&[password](?highlight=password#password)
+/BaseParams/[Сервер][1]/[Порт][2]/[Кластер][3]/[База][5]?[admin][4]&[key][6]&[login][7]&[password][8]
 
 #### Пример вызова функции
 
@@ -297,7 +297,7 @@ IP адрес сервера RAS (`string`)
     ```
 
 ### Установить статус блокировки базы данных 1С
-/Bases/[Сервер](?highlight=Сервер#Сервер)/[Порт](?highlight=Порт#Порт)/[Кластер](?highlight=Кластер#Кластер)/[База](?highlight=База#База)/[СтатусБлокировки](?highlight=СтатусБлокировки#СтатусБлокировки)?[admin](?highlight=admin#admin)&[key](?highlight=key#key)&[login](?highlight=login#login)&[password](?highlight=password#password)&[uc](?highlight=uc#uc)
+/Bases/[Сервер][1]/[Порт][2]/[Кластер][3]/[База][5]/[СтатусБлокировки][9]?[admin][4]&[key][6]&[login][7]&[password][8]&[uc][0]
 
 Возвращает параметры информационной базы после выполнения функции
 
@@ -353,7 +353,7 @@ IP адрес сервера RAS (`string`)
     ```
 
 ### Завершить сеансы базы данных 1С
-/Sessions/[Сервер](?highlight=Сервер#Сервер)/[Порт](?highlight=Порт#Порт)/[Кластер](?highlight=Кластер#Кластер)/[База](?highlight=База#База)/Close?[admin](?highlight=admin#admin)&[key](?highlight=key#key)&[login](?highlight=login#login)&[password](?highlight=password#password)
+/Sessions/[Сервер][1]/[Порт][2]/[Кластер][3]/[База][5]/Close?[admin][4]&[key][6]&[login][7]&[password][8]
 
 Даёт команду закрыть все сеансы кроме
 - RAS
@@ -398,3 +398,14 @@ IP адрес сервера RAS (`string`)
       "Лицензии": []
     }]
     ```
+
+[1]: ?highlight=Сервер#Сервер
+[2]: ?highlight=Порт#Порт
+[3]: ?highlight=Кластер#Кластер
+[5]: ?highlight=База#База
+[4]: ?highlight=admin#admin
+[6]: ?highlight=key#key
+[7]: ?highlight=login#login
+[8]: ?highlight=password#password
+[9]: ?highlight=СтатусБлокировки#СтатусБлокировки
+[0]: ?highlight=uc#uc
