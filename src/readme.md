@@ -1,4 +1,4 @@
-[![forthebadge](https://forthebadge.com/images/badges/powered-by-black-magic.svg)](https://forthebadge.com)
+![forthebadge](https://forthebadge.com/images/badges/powered-by-black-magic.svg)
 
 # Читайте внимательно
 ### Дополнительные вопросы можно задать в [telegram](https://t.me/grevinden)
