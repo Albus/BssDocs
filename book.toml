@@ -21,6 +21,9 @@ git-repository-icon = "fa-github"
 additional-js = [
     "theme/custom.js",
 ]
+additional-css = [
+    "custom.css",
+]
 cname = "docs.sbs.santens.ru"
 
 [build]
