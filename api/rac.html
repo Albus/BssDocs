@@ -1,0 +1,588 @@
+<!DOCTYPE HTML>
+<html lang="ru-RU" class="sidebar-visible no-js ayu">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>RAC - клиент службы администрирования 1С - SBS</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="Подборка документации">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../custom.css">
+
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "ayu" : "ayu";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><div><strong aria-hidden="true">1.</strong> Архивация</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../arc/powershell.html"><strong aria-hidden="true">1.1.</strong> Powershell make *.dt</a></li><li class="chapter-item "><a href="../arc/zip_every_day/index.html"><strong aria-hidden="true">1.2.</strong> CMD ежедневная *.zip</a><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item "><a href="../arc/zip_every_day/start.html"><strong aria-hidden="true">1.2.1.</strong> start.cmd</a></li><li class="chapter-item "><a href="../arc/zip_every_day/archive.html"><strong aria-hidden="true">1.2.2.</strong> archive.cmd</a></li></ol></li></ol></li><li class="chapter-item expanded "><div><strong aria-hidden="true">2.</strong> API - механизмы интеграции</div><a class="toggle"><div>❱</div></a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../api/rac.html" class="active"><strong aria-hidden="true">2.1.</strong> RAC - клиент службы администрирования 1С</a></li><li class="chapter-item "><div><strong aria-hidden="true">2.2.</strong> CRYPTO - служба электронной подписи и расшифровки GOST-R</div></li></ol></li><li class="chapter-item expanded "><li class="part-title"></li><li class="spacer"></li><li class="chapter-item expanded affix "><a href="../index.html">Дополнительные вопросы</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">SBS</h1>
+
+                    <div class="right-buttons">
+                        <a href="https://github.com/Albus/BssDocs" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="Управление-сервером-1С"><a class="header" href="#Управление-сервером-1С">Управление сервером 1С</a></h1>
+<p>Для удобства применения все функции работают http методом <code>GET</code> и возвращают json объект, как результат работы.</p>
+<p>Пример в powershell</p>
+<pre><code class="language-powershell">PS &gt; Invoke-RestMethod -Uri http://10.12.1.117:8315/hs/rac/Clusters/10.12.1.17/1545
+
+ВремяПринудительногоЗавершения                : 0
+УровеньОтказоустойчивости                     : 0
+УровеньБезопасностиСоединений                 : Незащищенное
+РежимБалансировкиНагрузки                     : По производительности
+Порт                                          : 1541
+ПериодПерезапускаПроцесса                     : 36000
+ОграничениеПоПамятиПроцесса                   : 0
+ОграничениеПоКоличествуОшибокПроцесса         : 0
+МаксимальныйПериодПревышенияПамяти            : 0
+ИмяКомпьютера                                 : VERONIKA
+Имя                                           : Santens
+ИдентификаторКластера                         : 75e25118-be3c-455f-a53d-4a902f1eb256
+ЗаписыватьДампПриЗавершенииПоПревышениюПамяти : False
+ЗавершатьПроблемныеПроцессы                   : False
+
+ВремяПринудительногоЗавершения                : 120
+УровеньОтказоустойчивости                     : 0
+УровеньБезопасностиСоединений                 : Незащищенное
+РежимБалансировкиНагрузки                     : По памяти
+Порт                                          : 1741
+ПериодПерезапускаПроцесса                     : 28800
+ОграничениеПоПамятиПроцесса                   : 0
+ОграничениеПоКоличествуОшибокПроцесса         : 0
+МаксимальныйПериодПревышенияПамяти            : 0
+ИмяКомпьютера                                 : VERONIKA
+Имя                                           : test
+ИдентификаторКластера                         : 73da1111-9ed4-427f-bddd-5bf11d85f3ca
+ЗаписыватьДампПриЗавершенииПоПревышениюПамяти : False
+ЗавершатьПроблемныеПроцессы                   : True
+</code></pre>
+<h2 id="Параметры-используемые-в-запросах"><a class="header" href="#Параметры-используемые-в-запросах">Параметры, используемые в запросах</a></h2>
+<h4 id="Сервер"><a class="header" href="#Сервер">Сервер</a></h4>
+<p>IP адрес сервера RAS (<code>string</code>)</p>
+<h4 id="Порт"><a class="header" href="#Порт">Порт</a></h4>
+<p>Номер порта прослушивания сервера RAS (<a href="https://docs.microsoft.com/ru-ru/dotnet/api/system.uint16.maxvalue"><code>uInt16</code></a>)</p>
+<h4 id="Кластер"><a class="header" href="#Кластер">Кластер</a></h4>
+<p>Наименование кластера 1С (<code>string</code>)</p>
+<h4 id="База"><a class="header" href="#База">База</a></h4>
+<p>Наименование базы данных 1С (<code>string</code>)</p>
+<h4 id="СтатусБлокировки"><a class="header" href="#СтатусБлокировки">СтатусБлокировки</a></h4>
+<p>Флаг запрета установки соединений с базой данных 1С (<code>string</code>)</p>
+<ul>
+<li>Lock - заблокировано</li>
+<li>UnLock - разблокировано</li>
+</ul>
+<h4 id="admin"><a class="header" href="#admin">admin</a></h4>
+<p>Логин админа сервера/кластера 1С (<code>string</code>), данная учётная запись должна существовать как в настройках сервера 1С так и в настройках кластера 1С либо сервер/кластер не должны использовать контроль доступа (стандартная настройка) </p>
+<h4 id="key"><a class="header" href="#key">key</a></h4>
+<p>Пароль админа сервера/кластера 1С (<code>string</code>)</p>
+<h4 id="login"><a class="header" href="#login">login</a></h4>
+<p>Логин полномочного пользователя базы данных 1С (<code>string</code>) </p>
+<h4 id="password"><a class="header" href="#password">password</a></h4>
+<p>Пароль полномочного пользователя базы данных 1С (<code>string</code>)</p>
+<h4 id="uc"><a class="header" href="#uc">uc</a></h4>
+<p>Код разрешения начала сеансов (<code>string</code>), аналог дополнительного параметра запуска 1С - <code>/UC</code> </p>
+<h2 id="Функции-api"><a class="header" href="#Функции-api">Функции API</a></h2>
+<h3 id="Получить-кластеры-сервера-1С"><a class="header" href="#Получить-кластеры-сервера-1С">Получить кластеры сервера 1С</a></h3>
+<p>/Clusters/<a href="?highlight=%D0%A1%D0%B5%D1%80%D0%B2%D0%B5%D1%80#%D0%A1%D0%B5%D1%80%D0%B2%D0%B5%D1%80">Сервер</a>/<a href="?highlight=%D0%9F%D0%BE%D1%80%D1%82#%D0%9F%D0%BE%D1%80%D1%82">Порт</a>?<a href="?highlight=admin#admin">admin</a>&amp;<a href="?highlight=key#key">key</a></p>
+<h4 id="Пример-вызова-функции"><a class="header" href="#Пример-вызова-функции">Пример вызова функции</a></h4>
+<ul>
+<li>
+<p>Запрос</p>
+<pre><code class="language-http">GET /hs/rac/Clusters/10.12.1.17/1545 HTTP/1.1
+User-Agent: HTTPie/1.0.3
+Accept-Encoding: gzip, deflate
+Accept: application/json, */*
+Connection: keep-alive
+Content-Type: application/json
+Host: 10.12.1.117:8315
+</code></pre>
+</li>
+<li>
+<p>Ответ</p>
+<pre><code class="language-http">HTTP/1.1 200 OK
+Connection: Keep-Alive
+Content-Length: 1952
+Content-type: application/json;charset=utf-8
+</code></pre>
+<ul>
+<li>Тело
+<pre><code class="language-json">[{
+  &quot;ВремяПринудительногоЗавершения&quot;: 0,
+  &quot;УровеньОтказоустойчивости&quot;: 0,
+  &quot;УровеньБезопасностиСоединений&quot;: &quot;Незащищенное&quot;,
+  &quot;РежимБалансировкиНагрузки&quot;: &quot;По производительности&quot;,
+  &quot;Порт&quot;: 1541,
+  &quot;ПериодПерезапускаПроцесса&quot;: 36000,
+  &quot;ОграничениеПоПамятиПроцесса&quot;: 0,
+  &quot;ОграничениеПоКоличествуОшибокПроцесса&quot;: 0,
+  &quot;МаксимальныйПериодПревышенияПамяти&quot;: 0,
+  &quot;ИмяКомпьютера&quot;: &quot;VERONIKA&quot;,
+  &quot;Имя&quot;: &quot;Santens&quot;,
+  &quot;ИдентификаторКластера&quot;: &quot;75e25118-be3c-455f-a53d-4a902f1eb256&quot;,
+  &quot;ЗаписыватьДампПриЗавершенииПоПревышениюПамяти&quot;: false,
+  &quot;ЗавершатьПроблемныеПроцессы&quot;: false
+ },{
+  &quot;ВремяПринудительногоЗавершения&quot;: 120,
+  &quot;УровеньОтказоустойчивости&quot;: 0,
+  &quot;УровеньБезопасностиСоединений&quot;: &quot;Незащищенное&quot;,
+  &quot;РежимБалансировкиНагрузки&quot;: &quot;По памяти&quot;,
+  &quot;Порт&quot;: 1741,
+  &quot;ПериодПерезапускаПроцесса&quot;: 28800,
+  &quot;ОграничениеПоПамятиПроцесса&quot;: 0,
+  &quot;ОграничениеПоКоличествуОшибокПроцесса&quot;: 0,
+  &quot;МаксимальныйПериодПревышенияПамяти&quot;: 0,
+  &quot;ИмяКомпьютера&quot;: &quot;VERONIKA&quot;,
+  &quot;Имя&quot;: &quot;test&quot;,
+  &quot;ИдентификаторКластера&quot;: &quot;73da1111-9ed4-427f-bddd-5bf11d85f3ca&quot;,
+  &quot;ЗаписыватьДампПриЗавершенииПоПревышениюПамяти&quot;: false,
+  &quot;ЗавершатьПроблемныеПроцессы&quot;: true
+}]
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Получить-базы-данных-кластера-1С"><a class="header" href="#Получить-базы-данных-кластера-1С">Получить базы данных кластера 1С</a></h3>
+<p>/Bases/<a href="?highlight=%D0%A1%D0%B5%D1%80%D0%B2%D0%B5%D1%80#%D0%A1%D0%B5%D1%80%D0%B2%D0%B5%D1%80">Сервер</a>/<a href="?highlight=%D0%9F%D0%BE%D1%80%D1%82#%D0%9F%D0%BE%D1%80%D1%82">Порт</a>/<a href="?highlight=%D0%9A%D0%BB%D0%B0%D1%81%D1%82%D0%B5%D1%80#%D0%9A%D0%BB%D0%B0%D1%81%D1%82%D0%B5%D1%80">Кластер</a>?<a href="?highlight=admin#admin">admin</a>&amp;<a href="?highlight=key#key">key</a></p>
+<h4 id="Пример-вызова-функции-1"><a class="header" href="#Пример-вызова-функции-1">Пример вызова функции</a></h4>
+<ul>
+<li>
+<p>Запрос</p>
+<pre><code class="language-http">GET /hs/rac/Bases/10.12.1.17/1545/test HTTP/1.1
+User-Agent: HTTPie/1.0.3
+Accept-Encoding: gzip, deflate
+Accept: application/json, */*
+Connection: keep-alive
+Content-Type: application/json
+Host: 10.12.1.117:8315
+</code></pre>
+</li>
+<li>
+<p>Ответ</p>
+<pre><code class="language-http">HTTP/1.1 200 OK
+Connection: Keep-Alive
+Content-Length: 78300
+Content-type: application/json;charset=utf-8
+</code></pre>
+<ul>
+<li>Тело
+<pre><code class="language-json">[{
+  &quot;БлокировкаРегламентныхЗаданий&quot;: false,
+  &quot;ВключенаБлокировкаНачалаСеансов&quot;: false,
+  &quot;ВремяНачалаБлокировки&quot;: null,
+  &quot;ВремяОкончанияБлокировки&quot;: null,
+  &quot;ИдентификаторИнформационнойБазы&quot;: &quot;a203e032-0ae6-416b-bd49-9d1054f58e9b&quot;,
+  &quot;Имя&quot;: &quot;Test_DO_Pavlov&quot;,
+  &quot;ИмяБазыДанных&quot;: null,
+  &quot;КодРазрешенияНачалаСеансов&quot;: null,
+  &quot;КодЯзыка&quot;: null,
+  &quot;ОбязательноеИспользованиеВнешнегоУправленияСеансами&quot;: false,
+  &quot;Описание&quot;: null,
+  &quot;ПараметрБлокировки&quot;: null,
+  &quot;ПарольПользователяБазыДанных&quot;: null,
+  &quot;ПользовательБазыДанных&quot;: null,
+  &quot;ПрофильБезопасности&quot;: null,
+  &quot;ПрофильБезопасностиБезопасногоРежима&quot;: null,
+  &quot;РазрешитьВыдачуЛицензий&quot;: false,
+  &quot;СерверБазДанных&quot;: null,
+  &quot;СмещениеДат&quot;: null,
+  &quot;СоздатьБазуДанных&quot;: false,
+  &quot;СообщениеБлокировки&quot;: null,
+  &quot;СтрокаПараметровВнешнегоУправленияСеансами&quot;: null,
+  &quot;СУБД&quot;: null,
+  &quot;УровеньБезопасностиСоединений&quot;: &quot;Незащищенное&quot;
+ },{
+  &quot;БлокировкаРегламентныхЗаданий&quot;: false,
+  &quot;ВключенаБлокировкаНачалаСеансов&quot;: false,
+  &quot;ВремяНачалаБлокировки&quot;: null,
+  &quot;ВремяОкончанияБлокировки&quot;: null,
+  &quot;ИдентификаторИнформационнойБазы&quot;: &quot;87c3ee94-f8e7-4bf8-b55b-cb54f9a2a74a&quot;,
+  &quot;Имя&quot;: &quot;test_do_new&quot;,
+  &quot;ИмяБазыДанных&quot;: null,
+  &quot;КодРазрешенияНачалаСеансов&quot;: null,
+  &quot;КодЯзыка&quot;: null,
+  &quot;ОбязательноеИспользованиеВнешнегоУправленияСеансами&quot;: false,
+  &quot;Описание&quot;: null,
+  &quot;ПараметрБлокировки&quot;: null,
+  &quot;ПарольПользователяБазыДанных&quot;: null,
+  &quot;ПользовательБазыДанных&quot;: null,
+  &quot;ПрофильБезопасности&quot;: null,
+  &quot;ПрофильБезопасностиБезопасногоРежима&quot;: null,
+  &quot;РазрешитьВыдачуЛицензий&quot;: false,
+  &quot;СерверБазДанных&quot;: null,
+  &quot;СмещениеДат&quot;: null,
+  &quot;СоздатьБазуДанных&quot;: false,
+  &quot;СообщениеБлокировки&quot;: null,
+  &quot;СтрокаПараметровВнешнегоУправленияСеансами&quot;: null,
+  &quot;СУБД&quot;: null,
+  &quot;УровеньБезопасностиСоединений&quot;: &quot;Незащищенное&quot;
+}]
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Получить-базу-данных-кластера-1С"><a class="header" href="#Получить-базу-данных-кластера-1С">Получить базу данных кластера 1С</a></h3>
+<p>/Bases/<a href="?highlight=%D0%A1%D0%B5%D1%80%D0%B2%D0%B5%D1%80#%D0%A1%D0%B5%D1%80%D0%B2%D0%B5%D1%80">Сервер</a>/<a href="?highlight=%D0%9F%D0%BE%D1%80%D1%82#%D0%9F%D0%BE%D1%80%D1%82">Порт</a>/<a href="?highlight=%D0%9A%D0%BB%D0%B0%D1%81%D1%82%D0%B5%D1%80#%D0%9A%D0%BB%D0%B0%D1%81%D1%82%D0%B5%D1%80">Кластер</a>/<a href="?highlight=%D0%91%D0%B0%D0%B7%D0%B0#%D0%91%D0%B0%D0%B7%D0%B0">База</a>?<a href="?highlight=admin#admin">admin</a>&amp;<a href="?highlight=key#key">key</a>&amp;<a href="?highlight=login#login">login</a>&amp;<a href="?highlight=password#password">password</a></p>
+<h4 id="Пример-вызова-функции-2"><a class="header" href="#Пример-вызова-функции-2">Пример вызова функции</a></h4>
+<ul>
+<li>
+<p>Запрос</p>
+<pre><code class="language-http">GET /hs/rac/Bases/10.12.1.16/1545/BSS/bss_dev HTTP/1.1
+Accept: application/json, */*;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Content-Type: application/json
+Host: 10.12.1.117:8315
+User-Agent: HTTPie/2.4.0
+</code></pre>
+</li>
+<li>
+<p>Ответ</p>
+<pre><code class="language-http">HTTP/1.1 200 OK
+Connection: Keep-Alive
+Content-Length: 1580
+Content-type: application/json;charset=utf-8
+</code></pre>
+<ul>
+<li>Тело
+<pre><code class="language-json">{
+ &quot;БлокировкаРегламентныхЗаданий&quot;: false,
+ &quot;ВключенаБлокировкаНачалаСеансов&quot;: false,
+ &quot;ВремяНачалаБлокировки&quot;: &quot;2020-11-21T01:31:36&quot;,
+ &quot;ВремяОкончанияБлокировки&quot;: &quot;2020-11-21T01:33:13&quot;,
+ &quot;ИдентификаторИнформационнойБазы&quot;: &quot;4bef5813-a9d1-43d8-9a59-1cb64a422a16&quot;,
+ &quot;Имя&quot;: &quot;bss_dev&quot;,
+ &quot;ИмяБазыДанных&quot;: &quot;bss_dev&quot;,
+ &quot;КодРазрешенияНачалаСеансов&quot;: &quot;709307c0-3955-4416-b1fd-4cb34bf6dd46&quot;,
+ &quot;КодЯзыка&quot;: &quot;ru_RU&quot;,
+ &quot;ОбязательноеИспользованиеВнешнегоУправленияСеансами&quot;: false,
+ &quot;Описание&quot;: &quot;База разработки BSS&quot;,
+ &quot;ПараметрБлокировки&quot;: &quot;{\&quot;environment\&quot;:{\&quot;production\&quot;:false}}&quot;,
+ &quot;ПарольПользователяБазыДанных&quot;: &quot;�&quot;,
+ &quot;ПользовательБазыДанных&quot;: &quot;postgres&quot;,
+ &quot;ПрофильБезопасности&quot;: null,
+ &quot;ПрофильБезопасностиБезопасногоРежима&quot;: null,
+ &quot;РазрешитьВыдачуЛицензий&quot;: true,
+ &quot;СерверБазДанных&quot;: &quot;10.12.1.230&quot;,
+ &quot;СмещениеДат&quot;: null,
+ &quot;СоздатьБазуДанных&quot;: false,
+ &quot;СообщениеБлокировки&quot;: null,
+ &quot;СтрокаПараметровВнешнегоУправленияСеансами&quot;: null,
+ &quot;СУБД&quot;: &quot;PostgreSQL&quot;,
+ &quot;УровеньБезопасностиСоединений&quot;: &quot;Незащищенное&quot;
+}
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Получить-параметр-блокировки-базы-данных-1С"><a class="header" href="#Получить-параметр-блокировки-базы-данных-1С">Получить параметр блокировки базы данных 1С</a></h3>
+<p>/BaseParams/<a href="?highlight=%D0%A1%D0%B5%D1%80%D0%B2%D0%B5%D1%80#%D0%A1%D0%B5%D1%80%D0%B2%D0%B5%D1%80">Сервер</a>/<a href="?highlight=%D0%9F%D0%BE%D1%80%D1%82#%D0%9F%D0%BE%D1%80%D1%82">Порт</a>/<a href="?highlight=%D0%9A%D0%BB%D0%B0%D1%81%D1%82%D0%B5%D1%80#%D0%9A%D0%BB%D0%B0%D1%81%D1%82%D0%B5%D1%80">Кластер</a>/<a href="?highlight=%D0%91%D0%B0%D0%B7%D0%B0#%D0%91%D0%B0%D0%B7%D0%B0">База</a>?<a href="?highlight=admin#admin">admin</a>&amp;<a href="?highlight=key#key">key</a>&amp;<a href="?highlight=login#login">login</a>&amp;<a href="?highlight=password#password">password</a></p>
+<h4 id="Пример-вызова-функции-3"><a class="header" href="#Пример-вызова-функции-3">Пример вызова функции</a></h4>
+<ul>
+<li>
+<p>Запрос</p>
+<pre><code class="language-http">GET /hs/rac/BaseParams/10.12.1.16/1545/BSS/bss_dev HTTP/1.1
+Accept: application/json, */*;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Content-Type: application/json
+Host: 10.12.1.117:8315
+User-Agent: HTTPie/2.4.0
+</code></pre>
+</li>
+<li>
+<p>Ответ</p>
+<pre><code class="language-http">HTTP/1.1 200 OK
+Connection: Keep-Alive
+Content-Length: 50
+Content-type: application/json;charset=utf-8
+</code></pre>
+<ul>
+<li>Тело
+<pre><code class="language-json">{
+  &quot;environment&quot;: {
+    &quot;production&quot;: false
+} }
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Установить-статус-блокировки-базы-данных-1С"><a class="header" href="#Установить-статус-блокировки-базы-данных-1С">Установить статус блокировки базы данных 1С</a></h3>
+<p>/Bases/<a href="?highlight=%D0%A1%D0%B5%D1%80%D0%B2%D0%B5%D1%80#%D0%A1%D0%B5%D1%80%D0%B2%D0%B5%D1%80">Сервер</a>/<a href="?highlight=%D0%9F%D0%BE%D1%80%D1%82#%D0%9F%D0%BE%D1%80%D1%82">Порт</a>/<a href="?highlight=%D0%9A%D0%BB%D0%B0%D1%81%D1%82%D0%B5%D1%80#%D0%9A%D0%BB%D0%B0%D1%81%D1%82%D0%B5%D1%80">Кластер</a>/<a href="?highlight=%D0%91%D0%B0%D0%B7%D0%B0#%D0%91%D0%B0%D0%B7%D0%B0">База</a>/<a href="?highlight=%D0%A1%D1%82%D0%B0%D1%82%D1%83%D1%81%D0%91%D0%BB%D0%BE%D0%BA%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B8#%D0%A1%D1%82%D0%B0%D1%82%D1%83%D1%81%D0%91%D0%BB%D0%BE%D0%BA%D0%B8%D1%80%D0%BE%D0%B2%D0%BA%D0%B8">СтатусБлокировки</a>?<a href="?highlight=admin#admin">admin</a>&amp;<a href="?highlight=key#key">key</a>&amp;<a href="?highlight=login#login">login</a>&amp;<a href="?highlight=password#password">password</a>&amp;<a href="?highlight=uc#uc">uc</a></p>
+<p>Возвращает параметры информационной базы после выполнения функции</p>
+<h4 id="Пример-вызова-функции-4"><a class="header" href="#Пример-вызова-функции-4">Пример вызова функции</a></h4>
+<ul>
+<li>
+<p>Запрос</p>
+<pre><code class="language-http">GET /hs/rac/Bases/10.12.1.16/1545/BSS/bss_dev/Lock?uc=SecretKey HTTP/1.1
+Accept: application/json, */*;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Content-Type: application/json
+Host: 10.12.1.117:8315
+User-Agent: HTTPie/2.4.0
+</code></pre>
+</li>
+<li>
+<p>Ответ</p>
+<pre><code class="language-http">HTTP/1.1 200 OK
+Connection: Keep-Alive
+Content-Length: 1631
+Content-type: application/json;charset=utf-8
+</code></pre>
+<ul>
+<li>Тело
+<pre><code class="language-json">{
+ &quot;БлокировкаРегламентныхЗаданий&quot;: true,
+ &quot;ВключенаБлокировкаНачалаСеансов&quot;: true,
+ &quot;ВремяНачалаБлокировки&quot;: &quot;2021-02-27T16:17:20&quot;,
+ &quot;ВремяОкончанияБлокировки&quot;: null,
+ &quot;ИдентификаторИнформационнойБазы&quot;: &quot;4bef5813-a9d1-43d8-9a59-1cb64a422a16&quot;,
+ &quot;Имя&quot;: &quot;bss_dev&quot;,
+ &quot;ИмяБазыДанных&quot;: &quot;bss_dev&quot;,
+ &quot;КодРазрешенияНачалаСеансов&quot;: &quot;SecretKey&quot;,
+ &quot;КодЯзыка&quot;: &quot;ru_RU&quot;,
+ &quot;ОбязательноеИспользованиеВнешнегоУправленияСеансами&quot;: false,
+ &quot;Описание&quot;: &quot;База разработки BSS&quot;,
+ &quot;ПараметрБлокировки&quot;: &quot;{\&quot;environment\&quot;:{\&quot;production\&quot;:false}}&quot;,
+ &quot;ПарольПользователяБазыДанных&quot;: &quot;�&quot;,
+ &quot;ПользовательБазыДанных&quot;: &quot;postgres&quot;,
+ &quot;ПрофильБезопасности&quot;: null,
+ &quot;ПрофильБезопасностиБезопасногоРежима&quot;: null,
+ &quot;РазрешитьВыдачуЛицензий&quot;: true,
+ &quot;СерверБазДанных&quot;: &quot;10.12.1.230&quot;,
+ &quot;СмещениеДат&quot;: null,
+ &quot;СоздатьБазуДанных&quot;: false,
+ &quot;СообщениеБлокировки&quot;: &quot;База заблокирована для проведения регламентных работ&quot;,
+ &quot;СтрокаПараметровВнешнегоУправленияСеансами&quot;: null,
+ &quot;СУБД&quot;: &quot;PostgreSQL&quot;,
+ &quot;УровеньБезопасностиСоединений&quot;: &quot;Незащищенное&quot;
+}
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="Завершить-сеансы-базы-данных-1С"><a class="header" href="#Завершить-сеансы-базы-данных-1С">Завершить сеансы базы данных 1С</a></h3>
+<p>/Sessions/<a href="?highlight=%D0%A1%D0%B5%D1%80%D0%B2%D0%B5%D1%80#%D0%A1%D0%B5%D1%80%D0%B2%D0%B5%D1%80">Сервер</a>/<a href="?highlight=%D0%9F%D0%BE%D1%80%D1%82#%D0%9F%D0%BE%D1%80%D1%82">Порт</a>/<a href="?highlight=%D0%9A%D0%BB%D0%B0%D1%81%D1%82%D0%B5%D1%80#%D0%9A%D0%BB%D0%B0%D1%81%D1%82%D0%B5%D1%80">Кластер</a>/<a href="?highlight=%D0%91%D0%B0%D0%B7%D0%B0#%D0%91%D0%B0%D0%B7%D0%B0">База</a>/Close?<a href="?highlight=admin#admin">admin</a>&amp;<a href="?highlight=key#key">key</a>&amp;<a href="?highlight=login#login">login</a>&amp;<a href="?highlight=password#password">password</a></p>
+<p>Даёт команду закрыть все сеансы кроме</p>
+<ul>
+<li>RAS</li>
+<li>BackgroundJob</li>
+</ul>
+<p>В ответ выдаёт список сессий, продолжающих существовать, после исполнения функции </p>
+<h4 id="Пример-вызова-функции-5"><a class="header" href="#Пример-вызова-функции-5">Пример вызова функции</a></h4>
+<ul>
+<li>
+<p>Запрос</p>
+<pre><code class="language-http">GET /hs/rac/Sessions/10.12.1.16/1545/BSS/bss_dev/Close HTTP/1.1
+Accept: application/json, */*;q=0.5
+Accept-Encoding: gzip, deflate
+Connection: keep-alive
+Content-Type: application/json
+Host: 10.12.1.117:8315
+User-Agent: HTTPie/2.4.0
+</code></pre>
+</li>
+<li>
+<p>Ответ</p>
+<pre><code class="language-http">HTTP/1.1 200 OK
+Connection: Keep-Alive
+Content-Length: 3236
+Content-type: application/json;charset=utf-8
+</code></pre>
+<ul>
+<li>Тело
+<pre><code class="language-json">[{
+  &quot;ИмяКомпьютера&quot;: &quot;computer&quot;,
+  &quot;ИмяПользователя&quot;: &quot;DefUser&quot;,
+  &quot;ИмяПриложения&quot;: &quot;BackgroundJob&quot;,
+  &quot;ИмяТекущегоСервиса&quot;: &quot;&quot;,
+  &quot;Лицензии&quot;: []
+},{
+  &quot;ИмяКомпьютера&quot;: &quot;computer&quot;,
+  &quot;ИмяПользователя&quot;: &quot;user&quot;,
+  &quot;ИмяПриложения&quot;: &quot;RAS&quot;,
+  &quot;ИмяТекущегоСервиса&quot;: &quot;&quot;,
+  &quot;Лицензии&quot;: []
+}]
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../arc/zip_every_day/archive.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../index.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../arc/zip_every_day/archive.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../index.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="../theme/custom.js"></script>
+
+
+    </body>
+</html>
